@@ -1,8 +1,16 @@
 import { Bot, InlineKeyboard } from "https://deno.land/x/grammy@v1.34.0/mod.ts";
+import "https://deno.land/x/dotenv/load.ts";
 
-const bot = new Bot("8057740205:AAFbiAxMdeWvb2ioV8NsKDN2axluTbn0edo");
 
-// Log to check if bot is being initialized
+
+const BOT_TOKEN = Deno.env.get("BOT_TOKEN");
+
+if (!BOT_TOKEN) {
+    throw new Error("🚨 BOT_TOKEN is not defined in the .env file.");
+}
+
+// Initialize Bot
+const bot = new Bot(BOT_TOKEN);
 console.log("🤖 Initializing bot...");
 
 // Reply to any message with "Hi there!"
