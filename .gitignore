@@ -4,6 +4,9 @@ deno.lock
 package-lock.json
 package.json
 
+# Data json
+tasks.json
+
 # 🔑 Environment Variables
 .env
 
