@@ -8,8 +8,10 @@ import "https://deno.land/x/dotenv/load.ts";
 const BOT_TOKEN = Deno.env.get("BOT_TOKEN");
 
 if (!BOT_TOKEN) {
-    throw new Error("🚨 BOT_TOKEN is not defined in the .env file.");
-}
+    console.error("BOT_TOKEN is not defined in the environment.");
+    Deno.exit(1); // Exit the process with an error code
+  }
+  
 
 // Initialize Bot
 const bot = new Bot(BOT_TOKEN);
