@@ -3,6 +3,7 @@ import { tasks, Task, saveTasks, loadTasks } from "./Task.ts"
 import "https://deno.land/x/dotenv/load.ts";
 
 
+// nothing to do here
 
 const BOT_TOKEN = Deno.env.get("BOT_TOKEN");
 
