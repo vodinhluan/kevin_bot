@@ -1,8 +1,5 @@
-# 📦 Node.js dependencies
-node_modules/
+# 📦 Deno
 deno.lock
-package-lock.json
-package.json
 
 # Data json
 tasks.json
