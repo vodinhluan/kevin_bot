@@ -1,6 +1,9 @@
 # 📦 Deno
 deno.lock
 
+# bot
+bot.ts
+
 # Data json
 tasks.json
 

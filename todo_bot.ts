@@ -1,4 +1,3 @@
-// todo_bot.ts
 import { Bot } from "https://deno.land/x/grammy@v1.34.0/mod.ts";
 import { loadTasks, saveTask, removeTask, updateTaskStatus, clearAllTasks, Task } from "./Task.ts";
 import "https://deno.land/x/dotenv/load.ts";
@@ -23,7 +22,7 @@ bot.command("help", (ctx) => {
 });
 
 // Load tasks from database when the bot starts
-let tasks = loadTasks();
+let tasks = await loadTasks();
 
 // Add new task
 bot.command("addtask", async (ctx) => {
@@ -33,13 +32,13 @@ bot.command("addtask", async (ctx) => {
   }
 
   const newTask: Task = {
-    id: 0, // ID will be generated automatically by SQLite
+    id: 0, // ID will be generated automatically by MySQL
     text: taskText,
     done: false,
   };
 
-  saveTask(newTask);
-  tasks = loadTasks(); // Refresh tasks list
+  await saveTask(newTask);
+  tasks = await loadTasks(); // Refresh tasks list
   ctx.reply(`✅ Task added: *${taskText}*`, { parse_mode: "Markdown" });
 });
 
@@ -63,8 +62,8 @@ bot.command("removetask", async (ctx) => {
     return ctx.reply("❌ Please provide a valid task ID.");
   }
 
-  removeTask(taskId);
-  tasks = loadTasks(); // Refresh tasks list
+  await removeTask(taskId);
+  tasks = await loadTasks(); // Refresh tasks list
   ctx.reply(`🗑️ Task ${taskId} removed.`);
 });
 
@@ -80,15 +79,15 @@ bot.command("donetask", async (ctx) => {
     return ctx.reply(`❌ No task found with ID ${taskId}.`);
   }
 
-  updateTaskStatus(taskId, true);
-  tasks = loadTasks(); // Refresh tasks list
+  await updateTaskStatus(taskId, true);
+  tasks = await loadTasks(); // Refresh tasks list
   ctx.reply(`✅ Task ${taskId} marked as done.`);
 });
 
 // Clear all tasks
 bot.command("clearall", async (ctx) => {
-  clearAllTasks();
-  tasks = loadTasks(); // Refresh tasks list
+  await clearAllTasks();
+  tasks = await loadTasks(); // Refresh tasks list
   ctx.reply("✅ All tasks removed.");
 });
 
